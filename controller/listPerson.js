@@ -50,6 +50,7 @@ window.deletePerSon = function (id) {
 
 window.Sua = function (id) {
   document.querySelector("#btnClick").click();
+  document.getElementById('id').disabled = 'flase';
   let sonCapNhat = list.Sua(id);
   if (sonCapNhat) {
     var arrInput = document.querySelectorAll(

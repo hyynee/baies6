@@ -41,17 +41,6 @@ document.querySelector("#searchRegency").onchange = (event) => {
   }
 };
 
-// function renderInputType(arrInput, arrCheck) {
-//   arrInput.forEach((element) => {
-//     for (let inputRender of arrCheck) {
-//       if (element.id === inputRender) {
-//         element.style.display = "block";
-//         break;
-//       }
-//       element.style.display = "none";
-//     }
-//   });
-// }
 document.querySelector("#typeForm").onchange = (event) => {
   debugger;
   const student = [
