@@ -16,6 +16,7 @@ list.layLocalStorage(); // lay
 list.renderTablePerSon("#tBodylist");
 
 document.getElementById("btnAdd").onclick = function () {
+  document.getElementById("btnAdd").disabled = "true";
   let son = new Person();
   var tagSelect = document.getElementById("typeForm");
   var viTriTheChon = tagSelect.selectedIndex;
@@ -50,7 +51,9 @@ window.deletePerSon = function (id) {
 
 window.Sua = function (id) {
   document.querySelector("#btnClick").click();
-  document.getElementById('id').disabled = 'flase';
+  debugger
+  document.getElementById("id").disabled = "true";
+  document.getElementById("btnAdd").disabled = "true";
   let sonCapNhat = list.Sua(id);
   if (sonCapNhat) {
     var arrInput = document.querySelectorAll(
@@ -65,9 +68,74 @@ window.Sua = function (id) {
       sonCapNhat.regency = regency;
     }
   }
+  const student = [
+    "name",
+    "address",
+    "id",
+    "email",
+    "math",
+    "chemistry",
+    "physics",
+  ];
+  const employee = [
+    "name",
+    "address",
+    "id",
+    "email",
+    "dayOfWork",
+    "salaryOneDay",
+  ];
+  const customer = [
+    "name",
+    "address",
+    "id",
+    "email",
+    "nameCompany",
+    "review",
+    "invoiceValue",
+  ];
+  const input = document.querySelectorAll(".modal-body input");
+  switch (regency) {
+    case "sinh viên":
+      input.forEach((element) => {
+        for (let inputRender of student) {
+          if (element.id === inputRender) {
+            element.style.display = "block";
+            console.log(element.id);
+            break;
+          }
+          element.style.display = "none";
+        }
+      });
+      break;
+    case "nhân viên":
+      input.forEach((element) => {
+        for (let emrender of employee) {
+          if (element.id === emrender) {
+            element.style.display = "block";
+            console.log(element);
+            break;
+          }
+          element.style.display = "none";
+        }
+      });
+      break;
+    case "khách hàng":
+      input.forEach((element) => {
+        for (let cusrender of customer) {
+          if (element.id === cusrender) {
+            element.style.display = "block";
+            break;
+          }
+          element.style.display = "none";
+        }
+      });
+  }
 };
 
 document.querySelector("#btnUpdate").onclick = function () {
+  document.getElementById("id").disabled = "flase";
+  document.getElementById("btnAdd").disabled = "flase";
   var sonCapNhat = new Person();
   const newList = new List();
   const newStu = new StudentList(); // rỗng
@@ -148,3 +216,12 @@ function resetForm() {
   document.querySelector("#invoiceValue").value = "";
   document.querySelector("#review").value = "";
 }
+document.querySelector("#Close").onclick = function () {
+  document.getElementById("btnAdd").removeAttribute("disabled");
+  resetForm();
+  const input = document.querySelectorAll(".modal-body input");
+  console.log(input);
+  input.forEach((element) => {
+    element.style.display = " block";
+  });
+};

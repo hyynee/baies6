@@ -66,11 +66,6 @@ export class List {
       }
     }
   }
-
-  layDSTheoLoai(loai) {
-    // ...logic code
-    //return mang ds theo loai
-  }
 }
 export class StudentList {
   danhSach = [];

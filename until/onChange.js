@@ -40,9 +40,7 @@ document.querySelector("#searchRegency").onchange = (event) => {
       break;
   }
 };
-
 document.querySelector("#typeForm").onchange = (event) => {
-  debugger;
   const student = [
     "name",
     "address",
@@ -70,7 +68,6 @@ document.querySelector("#typeForm").onchange = (event) => {
     "invoiceValue",
   ];
   const input = document.querySelectorAll(".modal-body input");
-
   switch (event.target.value) {
     case "student":
       input.forEach((element) => {
