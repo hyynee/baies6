@@ -1,4 +1,5 @@
 import { Student, Employee, Customer } from "./Person.js";
+
 export class List {
   danhSach = [];
   themDanhSach(son) {
@@ -66,6 +67,41 @@ export class List {
       }
     }
   }
+  /* 
+  function filterListByRegency(listPerson, regency) {
+  const newList = new List(); // rỗng
+  const newStu = new StudentList(); // rỗng
+  const newEpl = new EmployeeList(); // rỗng
+  const newCus = new CustomerList(); // rỗng
+  newList.danhSach = listPerson; // newList chứa all phần tử trong 'DS'
+  newStu.danhSach = listPerson;
+  newEpl.danhSach = listPerson;
+  newCus.danhSach = listPerson;
+  if (regency !== "all") {
+    const personRegency = listPerson.filter(
+      (person) => person.regency == regency
+    );
+    newList.danhSach = personRegency;
+    newStu.danhSach = personRegency;
+    newEpl.danhSach = personRegency;
+    newCus.danhSach = personRegency;
+  }
+  switch (regency) {
+    case "sinh viên":
+      newStu.renderStudent("#tBodylist");
+      break;
+    case "nhân viên":
+      newEpl.renderEmployee("#tBodylist");
+      break;
+    case "khách hàng":
+      newCus.renderCustomer("#tBodylist");
+      break;
+    default:
+      newList.renderTablePerSon("#tBodylist");
+      break;
+  }
+}
+  */
 }
 export class StudentList {
   danhSach = [];
@@ -76,7 +112,7 @@ export class StudentList {
     let htmlContent = "";
     for (let son of this.danhSach) {
       let std = new Student();
-      Object.assign(std,son);
+      Object.assign(std, son);
       htmlContent += `
         <tr>
           <td>${std.id}</td>
@@ -203,5 +239,3 @@ export class CustomerList {
     document.querySelector(selectorTbody).innerHTML = htmlContent;
   }
 }
-
-

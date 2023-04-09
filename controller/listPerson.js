@@ -1,6 +1,16 @@
-import { List } from "../models/List.js";
-import { Person} from "../models/Person.js";
-
+import {
+  List,
+  StudentList,
+  EmployeeList,
+  CustomerList,
+} from "../models/List.js";
+import { Person } from "../models/Person.js";
+import {
+  validPerson,
+  validStudent,
+  validEmployee,
+  validCustomer,
+} from "../until/validation.js";
 let list = new List();
 list.layLocalStorage(); // lay
 list.renderTablePerSon("#tBodylist");
@@ -17,6 +27,9 @@ document.getElementById("btnAdd").onclick = function () {
   for (let input of arrInput) {
     let { id, value } = input;
     son[id] = value;
+  }
+  if (!validPerson()) {
+    return;
   }
   console.log("son", son);
   //
@@ -43,7 +56,7 @@ window.Sua = function (id) {
       ".modal-body select , .modal-body input"
     );
     for (let input of arrInput) {
-      let {id} = input;
+      let { id } = input;
       input.value = sonCapNhat[id];
       var tagSelect = document.getElementById("typeForm");
       var viTriTheChon = tagSelect.selectedIndex;
@@ -55,6 +68,10 @@ window.Sua = function (id) {
 
 document.querySelector("#btnUpdate").onclick = function () {
   var sonCapNhat = new Person();
+  const newList = new List();
+  const newStu = new StudentList(); // rỗng
+  const newEpl = new EmployeeList(); // rỗng
+  const newCus = new CustomerList(); // rỗng
   let arrInput = document.querySelectorAll(
     ".modal-body select , .modal-body input"
   );
@@ -66,9 +83,48 @@ document.querySelector("#btnUpdate").onclick = function () {
     var regency = tagSelect.options[viTriTheChon].innerHTML;
     sonCapNhat.regency = regency;
   }
+
+  console.log(sonCapNhat);
   list.capNhat(sonCapNhat);
-  list.renderTablePerSon("#tBodylist");
   list.luuLocalStorage();
+  const listPerson = list.danhSach;
+  // list.renderTablePerSon("#tBodylist");
+  if (regency !== "all") {
+    const personRegency = listPerson.filter(
+      (person) => person.regency == regency
+    );
+    newList.danhSach = personRegency;
+    newStu.danhSach = personRegency;
+    newEpl.danhSach = personRegency;
+    newCus.danhSach = personRegency;
+  }
+  switch (regency) {
+    case "sinh viên":
+      if (!validStudent()) {
+        return;
+      }
+      newStu.renderStudent("#tBodylist");
+      break;
+    case "nhân viên":
+      if (!validEmployee()) {
+        return;
+      }
+      newEpl.renderEmployee("#tBodylist");
+      break;
+    case "khách hàng":
+      if (!validCustomer()) {
+        return;
+      }
+      newCus.renderCustomer("#tBodylist");
+      break;
+    default:
+      if (!validPerson()) {
+        return;
+      }
+      newList.renderTablePerSon("#tBodylist");
+      break;
+  }
+
   resetForm();
 };
 
@@ -91,5 +147,3 @@ function resetForm() {
   document.querySelector("#invoiceValue").value = "";
   document.querySelector("#review").value = "";
 }
-
-

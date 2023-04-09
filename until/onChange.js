@@ -52,17 +52,70 @@ document.querySelector("#searchRegency").onchange = (event) => {
 //     }
 //   });
 // }
-// document.querySelector("#typeForm").onchange = (event) => {
-//   const student = [
-//     "name",
-//     "address",
-//     "id",
-//     "email",
-//     "math",
-//     "chemistry",
-//     "physics",
-//   ];
-//   const employee = [];
-//   const input = document.querySelectorAll(".modal-body input");
-//   renderInputType(input, event.target.value)
-// };
+document.querySelector("#typeForm").onchange = (event) => {
+  debugger;
+  const student = [
+    "name",
+    "address",
+    "id",
+    "email",
+    "math",
+    "chemistry",
+    "physics",
+  ];
+  const employee = [
+    "name",
+    "address",
+    "id",
+    "email",
+    "dayOfWork",
+    "salaryOneDay",
+  ];
+  const customer = [
+    "name",
+    "address",
+    "id",
+    "email",
+    "nameCompany",
+    "review",
+    "invoiceValue",
+  ];
+  const input = document.querySelectorAll(".modal-body input");
+
+  switch (event.target.value) {
+    case "student":
+      input.forEach((element) => {
+        for (let inputRender of student) {
+          if (element.id === inputRender) {
+            element.style.display = "block";
+            console.log(element.id);
+            break;
+          }
+          element.style.display = "none";
+        }
+      });
+      break;
+    case "employee":
+      input.forEach((element) => {
+        for (let emrender of employee) {
+          if (element.id === emrender) {
+            element.style.display = "block";
+            console.log(element);
+            break;
+          }
+          element.style.display = "none";
+        }
+      });
+      break;
+    case "customer":
+      input.forEach((element) => {
+        for (let cusrender of customer) {
+          if (element.id === cusrender) {
+            element.style.display = "block";
+            break;
+          }
+          element.style.display = "none";
+        }
+      });
+  }
+};

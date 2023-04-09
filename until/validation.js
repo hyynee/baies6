@@ -90,7 +90,7 @@ function validStudent() {
   } else {
     document.querySelector("#notiPhysics").innerHTML = "";
   }
-
+  
   return flag;
 }
 
